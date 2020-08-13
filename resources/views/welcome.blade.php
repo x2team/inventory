@@ -320,7 +320,11 @@
                     <!-- Topbar -->
 
                     <!-- Container Fluid-->
-                    <router-view></router-view>
+                    <div class="container-fluid" id="container-wrapper">
+                    
+                        <router-view></router-view>
+
+                    </div>
                     
                     <!---Container Fluid-->
                 </div>
@@ -328,9 +332,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>copyright &copy; <script>
-                                    document.write(new Date().getFullYear()); 
-                                </script> - developed by
+                            <span>copyright &copy; 2020 - developed by
                                 <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
                             </span>
                         </div>
@@ -347,10 +349,10 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    <script src="{{ asset('js/app.js') }}"></script>
 
-    <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
     {{-- <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script> --}}
