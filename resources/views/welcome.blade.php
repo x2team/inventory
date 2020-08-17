@@ -21,111 +21,123 @@
 
         <div id="wrapper">
             <!-- Sidebar -->
-            <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon">
-                        <img src="{{ asset('backend/img/logo/logo2.png') }}">
-                    </div>
-                    <div class="sidebar-brand-text mx-3">RuangAdmin</div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-                
-                <hr class="sidebar-divider">
-                <div class="sidebar-heading">
-                    Features
-                </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                        aria-expanded="true" aria-controls="collapseBootstrap">
-                        <i class="far fa-fw fa-window-maximize"></i>
-                        <span>Bootstrap UI</span>
-                    </a>
-                    <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Bootstrap UI</h6>
-                            <a class="collapse-item" href="alerts.html">Alerts</a>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                            <a class="collapse-item" href="modals.html">Modals</a>
-                            <a class="collapse-item" href="popovers.html">Popovers</a>
-                            <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+            <nav id="sidebar" 
+                style="display: none;"
+                v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true" >
+                <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                        <div class="sidebar-brand-icon">
+                            <img src="{{ asset('backend/img/logo/logo2.png') }}">
                         </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
-                        aria-expanded="true" aria-controls="collapseForm">
-                        <i class="fab fa-fw fa-wpforms"></i>
-                        <span>Forms</span>
+                        <div class="sidebar-brand-text mx-3">RuangAdmin</div>
                     </a>
-                    <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Forms</h6>
-                            <a class="collapse-item" href="form_basics.html">Form Basics</a>
-                            <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
+                    <hr class="sidebar-divider my-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span></a>
+                    </li>
+
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Features
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+                            aria-expanded="true" aria-controls="collapseBootstrap">
+                            <i class="far fa-fw fa-window-maximize"></i>
+                            <span>Bootstrap UI</span>
+                        </a>
+                        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Bootstrap UI</h6>
+                                <a class="collapse-item" href="alerts.html">Alerts</a>
+                                <a class="collapse-item" href="buttons.html">Buttons</a>
+                                <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
+                                <a class="collapse-item" href="modals.html">Modals</a>
+                                <a class="collapse-item" href="popovers.html">Popovers</a>
+                                <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
-                        aria-expanded="true" aria-controls="collapseTable">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                    <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Tables</h6>
-                            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-                            <a class="collapse-item" href="datatables.html">DataTables</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
+                            aria-expanded="true" aria-controls="collapseForm">
+                            <i class="fab fa-fw fa-wpforms"></i>
+                            <span>Forms</span>
+                        </a>
+                        <div id="collapseForm" class="collapse" aria-labelledby="headingForm"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Forms</h6>
+                                <a class="collapse-item" href="form_basics.html">Form Basics</a>
+                                <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="ui-colors.html">
-                        <i class="fas fa-fw fa-palette"></i>
-                        <span>UI Colors</span>
-                    </a>
-                </li>
-                <hr class="sidebar-divider">
-                <div class="sidebar-heading">
-                    Examples
-                </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
-                        aria-expanded="true" aria-controls="collapsePage">
-                        <i class="fas fa-fw fa-columns"></i>
-                        <span>Pages</span>
-                    </a>
-                    <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Example Pages</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
+                            aria-expanded="true" aria-controls="collapseTable">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Tables</span>
+                        </a>
+                        <div id="collapseTable" class="collapse" aria-labelledby="headingTable"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Tables</h6>
+                                <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
+                                <a class="collapse-item" href="datatables.html">DataTables</a>
+                            </div>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ui-colors.html">
+                            <i class="fas fa-fw fa-palette"></i>
+                            <span>UI Colors</span>
+                        </a>
+                    </li>
+                    <hr class="sidebar-divider">
+                    <div class="sidebar-heading">
+                        Examples
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span>
-                    </a>
-                </li>
-                <hr class="sidebar-divider">
-                <div class="version" id="version-ruangadmin"></div>
-            </ul>
-            <!-- Sidebar -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
+                            aria-expanded="true" aria-controls="collapsePage">
+                            <i class="fas fa-fw fa-columns"></i>
+                            <span>Pages</span>
+                        </a>
+                        <div id="collapsePage" class="collapse" aria-labelledby="headingPage"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Example Pages</h6>
+                                <a class="collapse-item" href="login.html">Login</a>
+                                <a class="collapse-item" href="register.html">Register</a>
+                                <a class="collapse-item" href="404.html">404 Page</a>
+                                <a class="collapse-item" href="blank.html">Blank Page</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="charts.html">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Charts</span>
+                        </a>
+                    </li>
+                    <hr class="sidebar-divider">
+                    <div class="version" id="version-ruangadmin"></div>
+                </ul>
+            </nav>
+            <!-- End Sidebar -->
+
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <!-- TopBar -->
-                    <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+                    <nav id="topbar" 
+                        style="display: none;" 
+                        class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top"
+                        v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ? false : true" >
+                        
                         <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -170,7 +182,8 @@
                                         </div>
                                         <div>
                                             <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                            <span class="font-weight-bold">A new monthly report is ready to
+                                                download!</span>
                                         </div>
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -195,7 +208,8 @@
                                             Spending Alert: We've noticed unusually high spending for your account.
                                         </div>
                                     </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                        Alerts</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -216,7 +230,8 @@
                                             <div class="status-indicator bg-success"></div>
                                         </div>
                                         <div class="font-weight-bold">
-                                            <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            <div class="text-truncate">Hi there! I am wondering if you can help me with
+                                                a
                                                 problem I've been
                                                 having.</div>
                                             <div class="small text-gray-500">Udin Cilok · 58m</div>
@@ -229,13 +244,15 @@
                                             <div class="status-indicator bg-default"></div>
                                         </div>
                                         <div>
-                                            <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            <div class="text-truncate">Am I a good boy? The reason I ask is because
+                                                someone
                                                 told me that people
                                                 say this to all dogs, even if they aren't good...</div>
                                             <div class="small text-gray-500">Jaenab · 2w</div>
                                         </div>
                                     </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More
+                                        Messages</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
@@ -255,8 +272,9 @@
                                                 <div class="small float-right"><b>50%</b></div>
                                             </div>
                                             <div class="progress" style="height: 12px;">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                    style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </a>
@@ -266,8 +284,9 @@
                                                 <div class="small float-right"><b>30%</b></div>
                                             </div>
                                             <div class="progress" style="height: 12px;">
-                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 30%"
-                                                    aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                    style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </a>
@@ -277,8 +296,9 @@
                                                 <div class="small float-right"><b>75%</b></div>
                                             </div>
                                             <div class="progress" style="height: 12px;">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%"
-                                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                    style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </a>
@@ -308,11 +328,11 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
+                                    <router-link to="/logout" class="dropdown-item" data-toggle="modal"
                                         data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
-                                    </a>
+                                    </router-link>
                                 </div>
                             </li>
                         </ul>
@@ -321,11 +341,11 @@
 
                     <!-- Container Fluid-->
                     <div class="container-fluid" id="container-wrapper">
-                    
+
                         <router-view></router-view>
 
                     </div>
-                    
+
                     <!---Container Fluid-->
                 </div>
                 <!-- Footer -->
@@ -357,6 +377,14 @@
     <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
     {{-- <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script> --}}
     {{-- <script src="{{ asset('backend/js/demo/chart-area-demo.js') }}"></script> --}}
+
+    <script type="text/javascript">
+        let token = localStorage.getItem('token');
+        if(token){
+            $('#sidebar').css('display', '');
+            $('#topbar').css('display', '');
+        }
+    </script>
 </body>
 
 </html>
