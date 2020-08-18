@@ -36,6 +36,15 @@ class Notification
             
         }).show();
     }
+    image_validation(){
+        new Noty({
+            type: 'warning',
+            text: 'Upload hình < 1MB',
+            layout: 'topRight',
+            timeout: 1000,
+            
+        }).show();
+    }
 }
 
 export default Notification = new Notification();

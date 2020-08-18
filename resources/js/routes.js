@@ -1,5 +1,6 @@
 
 
+let Test = require('./components/Test.vue').default;
 
 let Login = require('./components/auth/Login.vue').default;
 let Register = require('./components/auth/Register.vue').default;
@@ -16,7 +17,10 @@ let Employee = require('./components/employee/Index.vue').default;
 
 
 
+
 export const routes = [
+    { path: '/test', component: Test, name: 'Test' },
+
     { path: '/', component: Login, name: '/' },
     { path: '/register', component: Register, name: 'Register' },
     { path: '/forget', component: Forget, name: 'Forget' },
@@ -25,6 +29,7 @@ export const routes = [
 
     { path: '/store-employee', component: StoreEmployee, name: 'StoreEmployee' },
     { path: '/employee', component: Employee, name: 'Employee' },
+    
   ]
 
 
