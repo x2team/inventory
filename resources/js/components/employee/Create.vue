@@ -174,15 +174,16 @@ export default {
                 let reader = new FileReader();
                 reader.onload = event => {
                     this.form.photo = event.target.result;
-                    console.log(event.target.result);
+                    // console.log(event.target.result);
                 }
                 reader.readAsDataURL(file);
                 
             }
-            console.log(event.target.result);
+            // console.log(event.target.result);
 
         },
         employeeInsert(){
+           
             axios.post('/api/employee', this.form)
                 .then(res => {
                     this.$router.push({ name: 'Employee' });
