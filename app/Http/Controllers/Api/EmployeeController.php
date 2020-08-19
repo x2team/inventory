@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
+    
+    protected $uploadPath;
+
+    public function __construct()
+    {
+        // parent::__construct();
+        
+        $this->uploadPath = public_path(config('cms.image.directory'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,40 +57,37 @@ class EmployeeController extends Controller
         //     'phone' => 'required|unique:employees',
 
         // ]);
+        // dd($request->all());
+        $data = $this->handleRequest($request);
         
-            // dd($request->all());
+        Employee::create($data);
+
+        return response()->json('success');
+    }
+    private function handleRequest($request)
+    {   
+        $data = $request->all();
+
+        /**
+         * Handle Image
+         */
         if($request->photo){
             $position = strpos($request->photo, ';');
             $sub = substr($request->photo, 0, $position);
             $ext = explode('/', $sub)[1];
-            
             $name = time().".".$ext;
+
             $img = Image::make($request->photo)->resize(240,200);
+            $data['photo'] = "employee/".$name;
+            $path = storage_path("app/public/" . $data['photo']);
             
-            // $directory = storage_path()."/app/public/employee/".  date("Y") . '/' . date("m");
-            $directory = public_path('employee/') . $name;
-            // $data['image'] = $request->photo->storeAs('employee/' . $directory, $name ,'public', 0775, true);
-            // dd($directory);
-         
-            // dd(storage_path('app/file.txt'));
-            // Storage::putFileAs('employee', $request->photo, 'photo.jpg');
-            $img->save($directory);
+            Storage::disk('public')->makeDirectory('employee');
+            $img->save($path);
 
+            // Storage::putFileAs('app/public/employee/', new File($img), 'photo.jpg');
 
-
-            $employee = new Employee();
-            $employee->name = $request->name;
-            $employee->email = $request->email;
-            $employee->phone = $request->phone;
-            $employee->salary = $request->salary;
-            $employee->address = $request->address;
-            $employee->nid = $request->nid;
-            $employee->joining_date = $request->joining_date;
-            // $employee->photo = $data['image'];
-            $employee->save();
-            
-            
-        }
+        }        
+        return $data;
     }
 
     /**
@@ -123,8 +130,24 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        //
+        // dd($this->uploadPath);
+
+
+        $employee = Employee::findOrFail($id);
+
+        $this->removeImage($employee->photo);
+
+        $employee->delete();
+
+        return response()->json('Xoa thanh cong');
+    }
+    private function removeImage($oldImage)
+    {
+        if( ! empty($oldImage)){
+            $imageFilePath = $this->uploadPath . '/' . $oldImage;
+            if( file_exists($imageFilePath)) unlink($imageFilePath);
+        }
     }
 }

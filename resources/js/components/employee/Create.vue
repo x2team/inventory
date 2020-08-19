@@ -58,7 +58,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="salary"
-                                                    placeholder="Enter Your salary"
+                                                    placeholder="Enter Your Salary"
                                                     v-model="form.salary"
                                                 />
                                                 <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
