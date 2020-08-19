@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -55,18 +57,26 @@ class EmployeeController extends Controller
             $name = time().".".$ext;
             $img = Image::make($request->photo)->resize(240,200);
             
-            $directory = date("Y") . '/' . date("m");
-            $data['image'] = $request->photo->storeAs('employee/' . $directory, $name ,'public', 0775, true);
+            // $directory = storage_path()."/app/public/employee/".  date("Y") . '/' . date("m");
+            $directory = public_path('employee/') . $name;
+            // $data['image'] = $request->photo->storeAs('employee/' . $directory, $name ,'public', 0775, true);
+            // dd($directory);
+         
+            // dd(storage_path('app/file.txt'));
+            // Storage::putFileAs('employee', $request->photo, 'photo.jpg');
+            $img->save($directory);
+
+
 
             $employee = new Employee();
             $employee->name = $request->name;
             $employee->email = $request->email;
             $employee->phone = $request->phone;
-            $employee->sallary = $request->sallary;
+            $employee->salary = $request->salary;
             $employee->address = $request->address;
             $employee->nid = $request->nid;
             $employee->joining_date = $request->joining_date;
-            $employee->photo = $data['image'];
+            // $employee->photo = $data['image'];
             $employee->save();
             
             

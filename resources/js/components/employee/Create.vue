@@ -57,11 +57,11 @@
                                                 <input
                                                     type="text"
                                                     class="form-control"
-                                                    id="sallary"
-                                                    placeholder="Enter Your Sallary"
-                                                    v-model="form.sallary"
+                                                    id="salary"
+                                                    placeholder="Enter Your salary"
+                                                    v-model="form.salary"
                                                 />
-                                                <small class="text-danger" v-if="errors.sallary">{{ errors.sallary[0] }}</small>
+                                                <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
                                             </div>
                                         </div>
 
@@ -149,7 +149,7 @@ export default {
                 name: null,
                 email: null,
                 address: null,
-                sallary: null,
+                salary: null,
                 joining_date: null,
                 nid: null,
                 phone: null,
