@@ -58,7 +58,6 @@
                                     <td>
                                         <img
                                             :src="'storage/' + employee.photo"
-                                            alt=""
                                             id="photo"
                                         />
                                     </td>
@@ -66,12 +65,13 @@
                                     <td>{{ employee.salary }}</td>
                                     <td>{{ employee.joining_date }}</td>
                                     <td>
-                                        <button
+                                        <router-link
+                                            :to="{ name: 'EditEmployee', params: {id:employee.id}}"
                                             @click="editEmployee(employee.id)"
                                             class="btn btn-sm btn-primary"
                                         >
                                             Edit
-                                        </button>
+                                        </router-link>
                                         <button
                                             @click="deleteEmployee(employee.id)"
                                             class="btn btn-sm btn-danger"
@@ -99,9 +99,11 @@ export default {
         };
     },
     created() {
+        // Check Logged in?
         if (!User.loggedIn()) {
             this.$router.push({ name: "/" });
         }
+
         this.allEmployee();
     },
     methods: {
@@ -110,7 +112,6 @@ export default {
                 .get("api/employee/")
                 .then(res => {
                     this.employees = res.data;
-                    console.log(this.employees);
                 })
                 .catch(error => {});
         },

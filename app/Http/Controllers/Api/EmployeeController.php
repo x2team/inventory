@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         //     'phone' => 'required|unique:employees',
 
         // ]);
-        // dd($request->all());
+
         $data = $this->handleRequest($request);
         
         Employee::create($data);
@@ -71,6 +71,19 @@ class EmployeeController extends Controller
         /**
          * Handle Image
          */
+        // if($request->newPhoto){
+        //     $position = strpos($request->newPhoto, ';');
+        //     $sub = substr($request->newPhoto, 0, $position);
+        //     $ext = explode('/', $sub)[1];
+        //     $name = time().".".$ext;
+
+        //     $img = Image::make($request->newPhoto)->resize(240,200);
+        //     $data['newPhoto'] = "employee/".$name;
+        //     $path = storage_path("app/public/" . $data['newPhoto']);
+            
+        //     Storage::disk('public')->makeDirectory('employee');
+        //     $img->save($path);
+        // }
         if($request->photo){
             $position = strpos($request->photo, ';');
             $sub = substr($request->photo, 0, $position);
@@ -96,9 +109,11 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        return response()->json($employee);
     }
 
     /**
@@ -119,9 +134,28 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+
+        $employee = Employee::findOrFail($id);
+
+        $oldImage               = $employee->photo;
+
+        if($request->photo !== $oldImage){
+            $data = $this->handleRequest($request);
+        }
+        else{
+            $data = $request->all();
+        }
+
+        $employee->update($data);
+
+        if($oldImage !== $employee->photo){
+            $this->removeImage($oldImage);
+        }
+
+        return response()->json($employee);
     }
 
     /**
@@ -132,9 +166,6 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        // dd($this->uploadPath);
-
-
         $employee = Employee::findOrFail($id);
 
         $this->removeImage($employee->photo);

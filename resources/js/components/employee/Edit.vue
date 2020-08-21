@@ -14,10 +14,10 @@
                                 <div class="login-form">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">
-                                            Add New Employee
+                                            Employee Update
                                         </h1>
                                     </div>
-                                    <form @submit.prevent="employeeInsert" class="employee" enctype="multipart/form-data">
+                                    <form @submit.prevent="employeeUpdate" class="edit-employee" enctype="multipart/form-data">
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -115,7 +115,16 @@
                                                 <small class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</small>
                                             </div>
                                             <div class="col-md-6">
-                                                <img :src="form.photo" style="height: 40px; width: 40px;">
+                                                <img
+                                                    v-if="form.newPhoto"
+                                                    :src="form.photo"
+                                                    id="photo"
+                                                />
+                                                <img
+                                                    v-else
+                                                    :src="'storage/' + form.photo"
+                                                    id="photo"
+                                                />
                                             </div>
                                         </div>
 
@@ -124,7 +133,7 @@
                                                 type="submit"
                                                 class="btn btn-primary btn-block"
                                             >
-                                                Submit
+                                                Update
                                             </button>
                                         </div>
                                         <hr />
@@ -146,14 +155,15 @@ export default {
     data() {
         return {
             form: {
-                name: null,
-                email: null,
-                address: null,
-                salary: null,
-                joining_date: null,
-                nid: null,
-                phone: null,
-                photo: null,
+                name: '',
+                email: '',
+                address: '',
+                salary: '',
+                joining_date: '',
+                nid: '',
+                phone: '',
+                photo: '',
+                newPhoto: '',
             },
             errors: {},
             
@@ -164,6 +174,15 @@ export default {
         if (!User.loggedIn()) {
             this.$router.push({ name: "/" });
         }
+
+        let id = this.$route.params.id;
+        axios.get('/api/employee/' + id)
+            .then(res => {
+                this.form = res.data;
+            })
+            .catch(error => {
+                console.log(error);
+            })
 	},
     methods: {
         onFileSelected(event){
@@ -175,7 +194,7 @@ export default {
                 let reader = new FileReader();
                 reader.onload = event => {
                     this.form.photo = event.target.result;
-                    // console.log(event.target.result);
+                    this.form.newPhoto = event.target.result;
                 }
                 reader.readAsDataURL(file);
                 
@@ -183,9 +202,9 @@ export default {
             // console.log(event.target.result);
 
         },
-        employeeInsert(){
-           
-            axios.post('/api/employee', this.form)
+        employeeUpdate(){
+            let id = this.$route.params.id;
+            axios.patch('/api/employee/'+id, this.form)
                 .then(res => {
                     this.$router.push({ name: 'Employee' });
                     Notification.success(); 
@@ -201,4 +220,9 @@ export default {
 };
 </script>
 
-<style lang=""></style>
+<style>
+#photo {
+    height: 40px;
+    width: 40px;
+}
+</style>
