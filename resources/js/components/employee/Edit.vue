@@ -67,15 +67,20 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <!-- <div class="input-group date">
-                                                    <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                
+                                                <div class="form-group" id="simple-date1">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="simpleDataInput"
+                                                                v-model="form.joining_date">
                                                     </div>
-                                                    <input type="text" class="form-control" value="01/06/2020" id="joining_date"
-                                                            v-model="form.joining_date">
-                                                </div> -->
-                                                <input type="date" class="form-control" value="dd/mm/yyyy" id="joining_date"
-                                                            v-model="form.joining_date">
+                                                </div>
+
+
+                                                <!-- <input type="date" class="form-control" id="joining_date"
+                                                            v-model="form.joining_date"> -->
                                                 <small class="text-danger" v-if="errors.joining_date">{{ errors.joining_date[0] }}</small>    
                                             </div>
                                             <div class="col-md-6">
@@ -183,6 +188,9 @@ export default {
             .catch(error => {
                 console.log(error);
             })
+            
+            
+
 	},
     methods: {
         onFileSelected(event){
