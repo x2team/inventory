@@ -136,11 +136,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-
         $employee = Employee::findOrFail($id);
 
         $oldImage               = $employee->photo;
+
+        // =======
+        // $newPhoto = $request->newPhoto;
+        // dd($newPhoto);
+        // =======
 
         if($request->photo !== $oldImage){
             $data = $this->handleRequest($request);

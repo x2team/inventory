@@ -67,7 +67,6 @@
                                     <td>
                                         <router-link
                                             :to="{ name: 'EditEmployee', params: {id:employee.id}}"
-                                            @click="editEmployee(employee.id)"
                                             class="btn btn-sm btn-primary"
                                         >
                                             Edit
@@ -148,6 +147,10 @@ export default {
                     );
                 }
             });
+        },
+        editEmployee()
+        {
+            console.log("Edit Employee");
         }
     },
     computed: {
