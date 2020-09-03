@@ -75,8 +75,8 @@
                             data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Suppliers</h6>
-                                <router-link to="" class="collapse-item">Add New</router-link>
-                                <router-link to="" class="collapse-item">List</router-link>
+                                <router-link :to="{ name: 'StoreSupplier' }" class="collapse-item">Add New</router-link>
+                                <router-link :to="{ name: 'Supplier' }" class="collapse-item">List</router-link>
                             </div>
                         </div>
                     </li>
@@ -412,12 +412,12 @@
         }
 
         // Bootstrap Date Picker
-        $('#simple-date1 .input-group.date').datepicker({
-            format: 'dd/mm/yyyy',
-            todayBtn: 'linked',
-            todayHighlight: true,
-            autoclose: true,        
-        });
+        // $('#simple-date1 .input-group.date').datepicker({
+        //     format: 'dd/mm/yyyy',
+        //     todayBtn: 'linked',
+        //     todayHighlight: true,
+        //     autoclose: true,        
+        // });
         
     </script>
 </body>

@@ -2,7 +2,7 @@
     <div>
 
         <div class="row">
-            <router-link :to="{ name: 'Employee' }" class="btn btn-primary" >All Employee</router-link>
+            <router-link :to="{ name: 'Supplier' }" class="btn btn-primary" >All Supplier</router-link>
         </div>
 
         <div class="row justify-content-center">
@@ -14,10 +14,10 @@
                                 <div class="login-form">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">
-                                            Employee Update
+                                            Supplier Update
                                         </h1>
                                     </div>
-                                    <form @submit.prevent="employeeUpdate" class="edit-employee" enctype="multipart/form-data">
+                                    <form @submit.prevent="supplierUpdate" class="edit-supplier" enctype="multipart/form-data">
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -57,43 +57,15 @@
                                                 <input
                                                     type="text"
                                                     class="form-control"
-                                                    id="salary"
-                                                    placeholder="Enter Your Salary"
-                                                    v-model="form.salary"
+                                                    id="phone"
+                                                    placeholder="Enter Your Phone"
+                                                    v-model="form.phone"
                                                 />
-                                                <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+                                                <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <div class="col-md-6">
-                                                
-                                                <div class="form-group" id="simple-date1">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                                        </div>
-                                                        <input type="text" class="form-control" id="simpleDataInput"
-                                                                v-model="form.joining_date">
-                                                    </div>
-                                                </div>
-
-
-                                                <!-- <input type="date" class="form-control" id="joining_date"
-                                                            v-model="form.joining_date"> -->
-                                                <small class="text-danger" v-if="errors.joining_date">{{ errors.joining_date[0] }}</small>    
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="nid"
-                                                    placeholder="Enter Your Nid"
-                                                    v-model="form.nid"
-                                                />
-                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -101,10 +73,10 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="phone"
-                                                    placeholder="Enter Your Phone"
-                                                    v-model="form.phone"
+                                                    placeholder="Enter Your ShopName"
+                                                    v-model="form.shopname"
                                                 />
-                                                <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
+                                                <small class="text-danger" v-if="errors.shopname">{{ errors.shopname[0] }}</small>
                                             </div>
                                             <div class="col-md-6">
                                                 
@@ -120,16 +92,7 @@
                                                 <small class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</small>
                                             </div>
                                             <div class="col-md-6">
-                                                <img
-                                                    v-if="form.newPhoto"
-                                                    :src="form.photo"
-                                                    id="photo"
-                                                />
-                                                <img
-                                                    v-else
-                                                    :src="'storage/' + form.photo"
-                                                    id="photo"
-                                                />
+                                                <img :src="form.photo" style="height: 40px; width: 40px;">
                                             </div>
                                         </div>
 
@@ -160,27 +123,17 @@ export default {
     data() {
         return {
             form: {
-                name: '',
-                email: '',
-                address: '',
-                salary: '',
-                joining_date: '',
-                nid: '',
-                phone: '',
-                photo: '',
-                newPhoto: '',
+                name: null,
+                email: null,
+                address: null,
+                phone: null,
+                photo: null,
+                shopname: null,
+                newPhoto: null,
             },
             errors: {},
             
         };
-    },
-    mounted(){
-        $('#simple-date1 .input-group.date').datepicker({
-            format: 'dd/mm/yyyy',
-            todayBtn: 'linked',
-            todayHighlight: true,
-            autoclose: true,        
-        });
     },
 	created() {
         // Check Logged in?
@@ -188,18 +141,20 @@ export default {
             this.$router.push({ name: "/" });
         }
 
+        
+        console.log()
+
         let id = this.$route.params.id;
-        axios.get('/api/employee/' + id)
+        axios.get('/api/supplier/' + id)
             .then(res => {
                 this.form = res.data;
             })
             .catch(error => {
                 console.log(error);
             })
-            
-            
 
-	},
+    },
+    
     methods: {
         onFileSelected(event){
             let file = event.target.files[0];
@@ -218,17 +173,31 @@ export default {
             // console.log(event.target.result);
 
         },
-        employeeUpdate(){
+        supplierUpdate(){
             let id = this.$route.params.id;
-            axios.patch('/api/employee/'+id, this.form)
+            axios.patch('/api/supplier/'+id, this.form)
                 .then(res => {
-                    this.$router.push({ name: 'Employee' });
+                    this.$router.push({ name: 'Supplier' });
                     Notification.success(); 
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 })
+        },
+        getImgPhoto(){
+            var imgPhoto = window.location.origin + '/storage/' + this.form.photo;
+            return imgPhoto;
         }
+    },
+    mounted()
+    {
+        // Bootstrap Date Picker
+        $('#simple-date1 .input-group.date').datepicker({
+            format: 'dd/mm/yyyy',
+            todayBtn: 'linked',
+            todayHighlight: true,
+            autoclose: true,        
+        });
     },
 	computed: {
 		
@@ -241,6 +210,4 @@ export default {
     height: 40px;
     width: 40px;
 }
-
-
 </style>

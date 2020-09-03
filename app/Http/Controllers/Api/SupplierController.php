@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\Supplier;
 use Intervention\Image\Facades\Image;
-use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
-class EmployeeController extends Controller
+class SupplierController extends Controller
 {
-    
     protected $uploadPath;
 
     public function __construct()
     {        
         $this->uploadPath = public_path(config('cms.image.directory'));
     }
+
+
 
     /**
      * Display a listing of the resource.
@@ -26,9 +26,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::all();
+        $suppliers = Supplier::all();
 
-        return response()->json($employee);
+        return response()->json($suppliers);
     }
 
     /**
@@ -49,19 +49,22 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // $validateData = $request->validate([
-        //     'name' => 'required|unique:employees|max:255',
-        //     'email' => 'required',
-        //     'phone' => 'required|unique:employees',
+        $validateData = $request->validate([
+            'name' => 'required|unique:suppliers|max:255',
+            'email' => 'required',
+            'address' => 'required',
+            'phone' => 'required|unique:suppliers',
+            'shopname' => 'required',
 
-        // ]);
+        ]);
 
         $data = $this->handleRequest($request);
         
-        Employee::create($data);
+        Supplier::create($data);
 
         return response()->json('success');
     }
+
     private function handleRequest($request)
     {   
         $data = $request->all();
@@ -69,19 +72,7 @@ class EmployeeController extends Controller
         /**
          * Handle Image
          */
-        // if($request->newPhoto){
-        //     $position = strpos($request->newPhoto, ';');
-        //     $sub = substr($request->newPhoto, 0, $position);
-        //     $ext = explode('/', $sub)[1];
-        //     $name = time().".".$ext;
-
-        //     $img = Image::make($request->newPhoto)->resize(240,200);
-        //     $data['newPhoto'] = "employee/".$name;
-        //     $path = storage_path("app/public/" . $data['newPhoto']);
-            
-        //     Storage::disk('public')->makeDirectory('employee');
-        //     $img->save($path);
-        // }
+      
         if($request->photo){
             $position = strpos($request->photo, ';');
             $sub = substr($request->photo, 0, $position);
@@ -89,13 +80,12 @@ class EmployeeController extends Controller
             $name = time().".".$ext;
 
             $img = Image::make($request->photo)->resize(240,200);
-            $data['photo'] = "employee/".$name;
+            $data['photo'] = "supplier/".$name;
             $path = storage_path("app/public/" . $data['photo']);
             
-            Storage::disk('public')->makeDirectory('employee');
+            Storage::disk('public')->makeDirectory('supplier');
             $img->save($path);
 
-            // Storage::putFileAs('app/public/employee/', new File($img), 'photo.jpg');
 
         }        
         return $data;
@@ -104,23 +94,23 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $employee = Employee::findOrFail($id);
+        $supplier = Supplier::findOrFail($id);
 
-        return response()->json($employee);
+        return response()->json($supplier);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
         //
     }
@@ -129,19 +119,14 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $employee = Employee::findOrFail($id);
+        $supplier = Supplier::findOrFail($id);
 
-        $oldImage               = $employee->photo;
-
-        // =======
-        // $newPhoto = $request->newPhoto;
-        // dd($newPhoto);
-        // =======
+        $oldImage               = $supplier->photo;
 
         if($request->photo !== $oldImage){
             $data = $this->handleRequest($request);
@@ -150,28 +135,28 @@ class EmployeeController extends Controller
             $data = $request->all();
         }
 
-        $employee->update($data);
+        $supplier->update($data);
 
-        if($oldImage !== $employee->photo){
+        if($oldImage !== $supplier->photo){
             $this->removeImage($oldImage);
         }
 
-        return response()->json($employee);
+        return response()->json($supplier);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $employee = Employee::findOrFail($id);
+        $supplier = Supplier::findOrFail($id);
 
-        $this->removeImage($employee->photo);
+        $this->removeImage($supplier->photo);
 
-        $employee->delete();
+        $supplier->delete();
 
         return response()->json('Xoa thanh cong');
     }
