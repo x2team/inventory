@@ -127,7 +127,7 @@
                                                 />
                                                 <img
                                                     v-else
-                                                    :src="'storage/' + form.photo"
+                                                    :src="getUrlPhoto()"
                                                     id="photo"
                                                 />
                                             </div>
@@ -228,6 +228,10 @@ export default {
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 })
+        },
+        getUrlPhoto(){
+            var urlPhoto = window.location.origin + '/storage/' + this.form.photo;
+            return urlPhoto;
         }
     },
 	computed: {
