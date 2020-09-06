@@ -80,6 +80,40 @@
                             </div>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#category"
+                            aria-expanded="true" aria-controls="category">
+                            <i class="far fa-fw fa-window-maximize"></i>
+                            <span>Categories</span>
+                        </a>
+                        <div id="category" class="collapse" aria-labelledby="headingBootstrap"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Categories</h6>
+                                <router-link :to="{ name: 'StoreCategory' }" class="collapse-item">Add New</router-link>
+                                <router-link :to="{ name: 'Category' }" class="collapse-item">List</router-link>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#product"
+                            aria-expanded="true" aria-controls="product">
+                            <i class="far fa-fw fa-window-maximize"></i>
+                            <span>Products</span>
+                        </a>
+                        <div id="product" class="collapse" aria-labelledby="headingBootstrap"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Products</h6>
+                                <router-link :to="{ name: 'StoreProduct' }" class="collapse-item">Add New</router-link>
+                                <router-link :to="{ name: 'Product' }" class="collapse-item">List</router-link>
+                            </div>
+                        </div>
+                    </li>
+
+
                     <hr class="sidebar-divider">
 
                     <li class="nav-item">

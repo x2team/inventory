@@ -127,7 +127,7 @@
                                                 />
                                                 <img
                                                     v-else
-                                                    :src="getUrlPhoto()"
+                                                    :src="'/storage/' + form.photo"
                                                     id="photo"
                                                 />
                                             </div>
@@ -167,7 +167,7 @@ export default {
                 joining_date: '',
                 nid: '',
                 phone: '',
-                photo: '',
+                photo: 'default.jpg',
                 newPhoto: '',
             },
             errors: {},
