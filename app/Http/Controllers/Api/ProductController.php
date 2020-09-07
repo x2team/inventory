@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-// use Illuminate\Support\Facades\DB;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -48,13 +49,39 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'product_name' => 'required|max:255',
-            'product_code' => 'required|unique:products|max:255',
-            'address' => 'required',
-            'phone' => 'required|unique:suppliers',
-            'shopname' => 'required',
-
+            'product_name'     => 'required|max:255',
+            'product_code'     => 'required|unique:products|max:255',
         ]);
+
+        
+        // $validator = Validator::make($request->all(), [
+        //     'product_name'     => 'required|max:255',
+        //     'product_code'     => 'required|unique:products|max:255',
+        //     // 'root'             => 'required',
+        //     // 'buying_price'     => 'required|unique:suppliers',
+        //     // 'selling_price'    => 'required',
+
+        //     // 'category_id'      => 'required',
+        //     // 'supplier_id'      => 'required',
+        //     // 'buying_date'      => 'required',
+        //     // 'image'            => 'required',
+        //     // 'product_quantity' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect('post/create')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+
+        // return response('co loi', Response::HTTP_OK);
+
+        // if ($validator->fails()) {
+        //     return response($validator, Response::HTTP_OK);
+        // }
+        
+
+        // return response(null, Response::HTTP_NO_CONTENT);
+        dd($request->all());
     }
 
     /**

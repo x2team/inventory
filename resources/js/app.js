@@ -9,6 +9,8 @@ require('./bootstrap');
 
 // Bootstrap Date Picker
 require('bootstrap-datepicker');
+// Jasny Bootstrap 4.0.0
+require('jasny-bootstrap');
 
 
 
