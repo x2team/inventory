@@ -113,6 +113,22 @@
                         </div>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#expense"
+                            aria-expanded="true" aria-controls="expense">
+                            <i class="far fa-fw fa-window-maximize"></i>
+                            <span>Expenses</span>
+                        </a>
+                        <div id="expense" class="collapse" aria-labelledby="headingBootstrap"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Expenses</h6>
+                                <router-link :to="{ name: 'StoreExpense' }" class="collapse-item">Add New</router-link>
+                                <router-link :to="{ name: 'Expense' }" class="collapse-item">List</router-link>
+                            </div>
+                        </div>
+                    </li>
+
 
                     <hr class="sidebar-divider">
 

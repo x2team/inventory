@@ -19,7 +19,7 @@ class EmployeeSeeder extends Seeder
 
         // generate 36 dummy posts employees
         $employees = [];
-        $faker = Factory::create();
+        $faker = Factory::create('vi_VN');
         
 
         $count = 0;

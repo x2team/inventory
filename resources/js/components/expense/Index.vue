@@ -1,9 +1,8 @@
 <template>
     <div>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <!-- <h1 class="h3 mb-0 text-gray-800">Simple Tables</h1> -->
-            <router-link :to="{ name: 'StoreProduct' }" class="btn btn-primary"
-                >Add New Product</router-link
+            <router-link :to="{ name: 'StoreCategory' }" class="btn btn-primary"
+                >Add New Category</router-link
             >
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -34,49 +33,33 @@
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
                     >
                         <h6 class="m-0 font-weight-bold text-primary">
-                            Product List
+                            Category List
                         </h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Code</th>
-                                    <th>Photo</th>
-                                    <th>Category</th>
-                                    <th>Buying Price</th>
-                                    <th>Seliing Price</th>
-                                    <th>Root</th>
+                                    <th>Category Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="product in filterSearch"
-                                    :key="product.id"
+                                    v-for="category in filterSearch"
+                                    :key="category.id"
                                 >
-                                    <td>{{ product.product_name }}</td>
-                                    <td>{{ product.product_code }}</td>
-                                    <td>
-                                        <img
-                                            :src="'storage/' + product.image"
-                                            id="photo"
-                                        />
-                                    </td>
-                                    <td>{{ product.category_name }}</td>
-                                    <td>{{ product.buying_price }}</td>
-                                    <td>{{ product.selling_price }}</td>
-                                    <td>{{ product.root }}</td>
+                                    <td>{{ category.category_name }}</td>
+                                    
                                     <td>
                                         <router-link
-                                            :to="{ name: 'EditProduct', params: {id:product.id}}"
+                                            :to="{ name: 'EditCategory', params: {id:category.id}}"
                                             class="btn btn-sm btn-primary"
                                         >
                                             Edit
                                         </router-link>
                                         <button
-                                            @click="deleteProduct(product.id)"
+                                            @click="deleteCategory(category.id)"
                                             class="btn btn-sm btn-danger"
                                         >
                                             Delete
@@ -97,7 +80,7 @@
 export default {
     data() {
         return {
-            products: [],
+            categories: [],
             searchTerm: ""
         };
     },
@@ -107,18 +90,18 @@ export default {
             this.$router.push({ name: "/" });
         }
 
-        this.allProduct();
+        this.allCategory();
     },
     methods: {
-        allProduct() {
+        allCategory() {
             axios
-                .get("api/product/")
+                .get("api/category/")
                 .then(res => {
-                    this.products = res.data;
+                    this.categories = res.data;
                 })
                 .catch(error => {});
         },
-        deleteProduct(id) {
+        deleteCategory(id) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -133,14 +116,14 @@ export default {
                     /**
                      * Delete from Front End
                      */
-                    axios.delete('api/product/'+id)
+                    axios.delete('api/category/'+id)
                     .then(res => {
-                        this.products = this.products.filter(product => {
-                            return product.id !== id;
+                        this.categories = this.categories.filter(category => {
+                            return category.id !== id;
                         })
                     })
                     .catch(error => {
-                        this.$router.push({ name: 'Product' })
+                        this.$router.push({ name: 'Category' })
                     })
 
 
@@ -152,17 +135,13 @@ export default {
                 }
             });
         },
-        editProduct()
-        {
-            console.log("Edit product");
-        }
+       
     },
     computed: {
         filterSearch() {
-            return this.products.filter(product => {
+            return this.categories.filter(category => {
                 return (
-                    product.product_name.match(this.searchTerm) ||
-                    product.product_code.match(this.searchTerm)
+                    category.category_name.match(this.searchTerm)
                 );
             });
         }

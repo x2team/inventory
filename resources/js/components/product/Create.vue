@@ -126,34 +126,10 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <!-- <div class="col-md-6">
-                                                <div class="custom-file">
-                                                    <input name="image" type="file" class="custom-file-input" id="customFile">
-                                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                                </div>
-                                                <small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img :src="form.image" style="height: 40px; width: 40px;">
-                                            </div> -->
-
-                                            <!-- <div class="col-md-6">
-                                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <div class="fileinput-preview img-thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                                    <div>
-                                                        <span class="btn btn-outline-secondary btn-file">
-                                                        <span class="fileinput-new">Select image</span>
-                                                        <span class="fileinput-exists">Change</span>
-                                                        <input type="file" name="image">
-                                                        </span>
-                                                        <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                            
                                             <div class="col-md-6">
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
+                                                        <small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
                                                         <img src="https://place-hold.it/190x140?text=190x140&italic&bold"  alt="...">
                                                     </div>
                                                     <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
@@ -167,6 +143,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
 
                                         </div>
 
@@ -219,58 +196,8 @@ export default {
         if (!User.loggedIn()) {
             this.$router.push({ name: "/" });
         }
-	},
-    methods: {
-        // onFileSelected(event){
-        //     let file = event.target.files[0];
-        //     if(file.size > 1048576){
-        //         Notification.image_validation();
-        //     }
-        //     else{
-        //         let reader = new FileReader();
-        //         reader.onload = event => {
-        //             this.form.image = event.target.result;
-        //         }
-        //         reader.readAsDataURL(file);
-        //     }
-        // },
-        productInsert(){
-
-            var formData = new FormData(document.getElementById('product-form'));
-
-            axios.post('/api/product', formData)
-                .then(res => {
-                    if(res.data){
-                        console.log(res.data);
-                        // Notification.error();
-                    };
-                 
-                 
-                 // this.$router.push({ name: 'Product' });
-                 
 
 
-
-                    Notification.success();
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                    console.log(error.response.data.errors);
-                })
-
-
-
-            // axios.post('/api/employee', this.form)
-            //     .then(res => {
-            //         this.$router.push({ name: 'Employee' });
-            //         Notification.success(); 
-            //     })
-            //     .catch(error => {
-            //         this.errors = error.response.data.errors;
-            //     })
-        }
-    },
-    created(){
         axios.get('/api/category')
             .then(res => {
                 this.categories = res.data;
@@ -286,6 +213,37 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+	},
+    methods: {
+        productInsert(){
+
+            var formData = new FormData(document.getElementById('product-form'));
+
+            axios.post('/api/product', formData)
+                .then(res => {
+                    if( ! res.data.errors){
+                        this.$router.push({ name: 'Product' });
+                        Notification.success();
+                    }
+                    else{
+                        this.errors = res.data.errors;
+                    };
+                })
+                .catch(error => {
+                    this.errors = error.response.data.errors;
+                })
+
+
+
+            // axios.post('/api/employee', this.form)
+            //     .then(res => {
+            //         this.$router.push({ name: 'Employee' });
+            //         Notification.success(); 
+            //     })
+            //     .catch(error => {
+            //         this.errors = error.response.data.errors;
+            //     })
+        }
     },
 	computed: {
 		

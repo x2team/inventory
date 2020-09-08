@@ -2,7 +2,7 @@
     <div>
 
         <div class="row">
-            <router-link :to="{ name: 'Employee' }" class="btn btn-primary" >All Employee</router-link>
+            <router-link :to="{ name: 'Product' }" class="btn btn-primary" >All Product</router-link>
         </div>
 
         <div class="row justify-content-center">
@@ -14,123 +14,138 @@
                                 <div class="login-form">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">
-                                            Employee Update
+                                            Product Update
                                         </h1>
                                     </div>
-                                    <form @submit.prevent="employeeUpdate" class="edit-employee" enctype="multipart/form-data">
+                                    <form @submit.prevent="productUpdate" class="product" enctype="multipart/form-data" id="product-form">
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
+                                                <label for="product_name">Product Name</label>
                                                 <input
+                                                    name="product_name"
                                                     type="text"
                                                     class="form-control"
-                                                    id="name"
-                                                    placeholder="Enter Your Full Name"
-                                                    v-model="form.name"
+                                                    id="product_name"
+                                                    placeholder="Enter Your Product Name"
+                                                    v-model="form.product_name"
+
                                                 />
-                                                <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+                                                <small class="text-danger" v-if="errors.product_name">{{ errors.product_name[0] }}</small>
                                             </div>
                                             <div class="col-md-6">
+                                                <label for="product_code">Product Code</label>
                                                 <input
+                                                    name="product_code"
                                                     type="text"
                                                     class="form-control"
-                                                    id="email"
-                                                    placeholder="Enter Your Email"
-                                                    v-model="form.email"
+                                                    id="product_code"
+                                                    placeholder="Enter Your Product Code"
+                                                    v-model="form.product_code"
                                                 />
-                                                <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+                                                <small class="text-danger" v-if="errors.product_code">{{ errors.product_code[0] }}</small>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="address"
-                                                    placeholder="Enter Your Address"
-                                                    v-model="form.address"
-                                                />
-                                                <small class="text-danger" v-if="errors.address">{{ errors.address[0] }}</small>
+                                                <label for="category_id">Product Category</label>
+                                                <select name="category_id" class="form-control" id="category_id" v-model="form.category_id">
+                                                    
+                                                    <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.category_name}}</option>
+
+                                                </select>
+                                                <small class="text-danger" v-if="errors.category_id">{{ errors.category_id[0] }}</small>
                                             </div>
                                             <div class="col-md-6">
+                                                <label for="supplier_id">Product Supplier</label>
+                                                <select name="supplier_id" class="form-control" id="supplier_id">
+                                                    
+                                                    <option :value="supplier.id" v-for="supplier in suppliers" :key="supplier.id">{{ supplier.name}}</option>
+
+                                                </select>
+                                                <small class="text-danger" v-if="errors.supplier_id">{{ errors.supplier_id[0] }}</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-4">
+                                                <label for="root">Product Root</label>
                                                 <input
+                                                    name="root"
                                                     type="text"
                                                     class="form-control"
-                                                    id="salary"
-                                                    placeholder="Enter Your Salary"
-                                                    v-model="form.salary"
+                                                    id="root"
+                                                    placeholder="Enter Product Name"
+                                                    v-model="form.root"
                                                 />
-                                                <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+                                                <small class="text-danger" v-if="errors.root">{{ errors.root[0] }}</small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="buying_price">Buying Price</label>
+                                                <input
+                                                    name="buying_price"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="buying_price"
+                                                    placeholder="Enter Buying Price"
+                                                    v-model="form.buying_price"
+                                                />
+                                                <small class="text-danger" v-if="errors.buying_price">{{ errors.buying_price[0] }}</small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="selling_price">Selling Price</label>
+                                                <input
+                                                    name="selling_price"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="selling_price"
+                                                    placeholder="Enter Selling Price"
+                                                    v-model="form.selling_price"
+                                                />
+                                                <small class="text-danger" v-if="errors.selling_price">{{ errors.selling_price[0] }}</small>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                
-                                                <div class="form-group" id="simple-date1">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                                        </div>
-                                                        <input type="text" class="form-control" id="simpleDataInput"
-                                                                v-model="form.joining_date">
+                                                <input name="buying_date" type="text" class="form-control" placeholder="dd/mm/yyyy"  id="buying_date"
+                                                            v-model="form.buying_date">
+                                                <small class="text-danger" v-if="errors.buying_date">{{ errors.buying_date[0] }}</small>    
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input
+                                                    name="product_quantity"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="product_quantity"
+                                                    placeholder="Enter Product Quantity"
+                                                    v-model="form.product_quantity"
+                                                />
+                                                <small class="text-danger" v-if="errors.product_quantity">{{ errors.product_quantity[0] }}</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
+                                                        <small class="text-danger" v-if="errors.image">{{ errors.image[0] }}</small>
+                                                        <img :src="'/storage/' + form.image"  alt="...">
+                                                    </div>
+                                                    <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                                    <div>
+                                                        <span class="btn btn-outline-secondary btn-file">
+                                                            <span class="fileinput-new">Select image</span>
+                                                            <span class="fileinput-exists">Change</span>
+                                                            <input type="file" name="image">
+                                                        </span>
+                                                        <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
                                                     </div>
                                                 </div>
+                                            </div>
 
 
-                                                <!-- <input type="date" class="form-control" id="joining_date"
-                                                            v-model="form.joining_date"> -->
-                                                <small class="text-danger" v-if="errors.joining_date">{{ errors.joining_date[0] }}</small>    
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="nid"
-                                                    placeholder="Enter Your Nid"
-                                                    v-model="form.nid"
-                                                />
-                                                <small class="text-danger" v-if="errors.nid">{{ errors.nid[0] }}</small>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-md-6">
-                                                <input
-                                                    type="text"
-                                                    class="form-control"
-                                                    id="phone"
-                                                    placeholder="Enter Your Phone"
-                                                    v-model="form.phone"
-                                                />
-                                                <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
-                                            </div>
-                                            <div class="col-md-6">
-                                                
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-md-6">
-                                                <div class="custom-file">
-                                                    <input @change="onFileSelected" type="file" class="custom-file-input" id="customFile">
-                                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                                </div>
-                                                <small class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</small>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img
-                                                    v-if="form.newPhoto"
-                                                    :src="form.photo"
-                                                    id="photo"
-                                                />
-                                                <img
-                                                    v-else
-                                                    :src="'/storage/' + form.photo"
-                                                    id="photo"
-                                                />
-                                            </div>
                                         </div>
 
                                         <div class="form-group">
@@ -138,13 +153,16 @@
                                                 type="submit"
                                                 class="btn btn-primary btn-block"
                                             >
-                                                Update
+                                                Submit
                                             </button>
                                         </div>
                                         <hr />
                                     </form>
+
                                     <hr />
+
                                     <div class="text-center"></div>
+
                                 </div>
                             </div>
                         </div>
@@ -160,27 +178,30 @@ export default {
     data() {
         return {
             form: {
-                name: '',
-                email: '',
-                address: '',
-                salary: '',
-                joining_date: '',
-                nid: '',
-                phone: '',
-                photo: 'default.jpg',
-                newPhoto: '',
+                category_id: null,
+                product_name: '',
+                product_code: null,
+                root: null,
+                buying_price: null,
+                selling_price: null,
+                supplier_id: null,
+                buying_date: null,
+                image: null,
+                product_quantity: null,
             },
             errors: {},
+            categories: {},
+            suppliers: {}
             
         };
     },
     mounted(){
-        $('#simple-date1 .input-group.date').datepicker({
-            format: 'dd/mm/yyyy',
-            todayBtn: 'linked',
-            todayHighlight: true,
-            autoclose: true,        
-        });
+        // $('#simple-date1 .input-group.date').datepicker({
+        //     format: 'dd/mm/yyyy',
+        //     todayBtn: 'linked',
+        //     todayHighlight: true,
+        //     autoclose: true,        
+        // });
     },
 	created() {
         // Check Logged in?
@@ -189,41 +210,49 @@ export default {
         }
 
         let id = this.$route.params.id;
-        axios.get('/api/employee/' + id)
+        axios.get('/api/product/' + id)
             .then(res => {
                 this.form = res.data;
             })
             .catch(error => {
                 console.log(error);
-            })
-            
-            
+            });
 
+        // Category Collected
+        axios.get('/api/category')
+            .then(res => {
+                this.categories = res.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        // Suppliers Collected
+        axios.get('/api/supplier/')
+            .then(res => {
+                this.suppliers = res.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
 	},
     methods: {
-        onFileSelected(event){
-            let file = event.target.files[0];
-            if(file.size > 1048576){
-                Notification.image_validation();
-            }
-            else{
-                let reader = new FileReader();
-                reader.onload = event => {
-                    this.form.photo = event.target.result;
-                    this.form.newPhoto = event.target.result;
-                }
-                reader.readAsDataURL(file);
-                
-            }
-            // console.log(event.target.result);
-
-        },
-        employeeUpdate(){
+        
+        productUpdate(){
+            
             let id = this.$route.params.id;
-            axios.patch('/api/employee/'+id, this.form)
+            var formData = new FormData(document.getElementById('product-form'));
+            // let config = { headers: { 'Content-Type': 'multipart/form-data'}, method: 'PATCH' }
+            formData.append('_method', 'PUT')
+
+            axios.post('/api/product/'+id, formData )
                 .then(res => {
-                    this.$router.push({ name: 'Employee' });
-                    Notification.success(); 
+                    if( ! res.data.errors){
+                        this.$router.push({ name: 'Product' });
+                        Notification.success();
+                    }
+                    else{
+                        this.errors = res.data.errors;
+                    };
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
