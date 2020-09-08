@@ -240,9 +240,18 @@ export default {
 
             axios.post('/api/product', formData)
                 .then(res => {
-                    // this.$router.push({ name: 'Product' });
-                    console.log(res);
-                    Notification.success(); 
+                    if(res.data){
+                        console.log(res.data);
+                        // Notification.error();
+                    };
+                 
+                 
+                 // this.$router.push({ name: 'Product' });
+                 
+
+
+
+                    Notification.success();
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

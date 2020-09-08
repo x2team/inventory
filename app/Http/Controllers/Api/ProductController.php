@@ -48,40 +48,40 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'product_name'     => 'required|max:255',
-            'product_code'     => 'required|unique:products|max:255',
-        ]);
-
-        
-        // $validator = Validator::make($request->all(), [
+        // $validateData = $request->validate([
         //     'product_name'     => 'required|max:255',
         //     'product_code'     => 'required|unique:products|max:255',
-        //     // 'root'             => 'required',
-        //     // 'buying_price'     => 'required|unique:suppliers',
-        //     // 'selling_price'    => 'required',
-
-        //     // 'category_id'      => 'required',
-        //     // 'supplier_id'      => 'required',
-        //     // 'buying_date'      => 'required',
-        //     // 'image'            => 'required',
-        //     // 'product_quantity' => 'required',
         // ]);
 
-        // if ($validator->fails()) {
-        //     return redirect('post/create')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
+        
+        $validator = Validator::make($request->all(), [
+            'product_name'     => 'required|max:255',
+            'product_code'     => 'required|unique:products|max:255',
+            // 'root'             => 'required',
+            // 'buying_price'     => 'required|unique:suppliers',
+            // 'selling_price'    => 'required',
+
+            // 'category_id'      => 'required',
+            // 'supplier_id'      => 'required',
+            // 'buying_date'      => 'required',
+            // 'image'            => 'required',
+            // 'product_quantity' => 'required',
+        ]);
+
+      
 
         // return response('co loi', Response::HTTP_OK);
 
         // if ($validator->fails()) {
-        //     return response($validator, Response::HTTP_OK);
+        //     return response()->json($validator->messages(), 200);
         // }
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()]);
+        }
         
 
         // return response(null, Response::HTTP_NO_CONTENT);
-        dd($request->all());
+        // dd($request->all());
     }
 
     /**
