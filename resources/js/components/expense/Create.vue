@@ -22,6 +22,7 @@
                                         @submit.prevent="expenseInsert"
                                         class="expense"
                                         enctype="multipart/form-data"
+                                        id="expense-form"
                                     >
                                         <div class="form-group row">
                                             <div class="col-md-12">
@@ -46,6 +47,7 @@
                                             <div class="col-md-12">
                                                 <label for="amount">Expense Amount</label>
                                                 <input
+                                                    name="amount"
                                                     type="text"
                                                     class="form-control"
                                                     id="amount"
@@ -98,12 +100,18 @@ export default {
         }
     },
     methods: {
-        categoryInsert() {
+        expenseInsert() {
+            var formData = new FormData(document.getElementById('expense-form'));
             axios
-                .post("/api/category", this.form)
+                .post("/api/expense", formData)
                 .then(res => {
-                    this.$router.push({ name: "Category" });
-                    Notification.success();
+                    if( ! res.data.errors){
+                        this.$router.push({ name: 'Expense' });
+                        Notification.success();
+                    }
+                    else{
+                        this.errors = res.data.errors;
+                    };
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

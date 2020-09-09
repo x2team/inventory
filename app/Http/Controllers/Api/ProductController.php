@@ -82,7 +82,7 @@ class ProductController extends Controller
         //     'product_code'     => 'required|unique:products|max:255',
         // ]);
         $validator = Validator::make($request->all(), [
-            'product_name'     => 'required|max:255',
+            'product_name'     => 'required|max:255|min:3',
             'product_code'     => 'required|unique:products|max:255',
             'root'             => 'required',
             'buying_price'     => 'required',

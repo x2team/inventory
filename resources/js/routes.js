@@ -28,8 +28,12 @@ let Product = require('./components/product/Index.vue').default;
 let EditProduct = require('./components/product/Edit.vue').default;
 // Expense Component
 let StoreExpense = require('./components/expense/Create.vue').default;
-let Expense = require('./components/expense/Index.vue').default;
+let Expense = require('./components/expense/Expense.vue').default;
 let EditExpense = require('./components/expense/Edit.vue').default;
+// Salary Component
+let Salary = require('./components/salary/All_Employee.vue').default;
+let PaySalary = require('./components/salary/Create.vue').default;
+
 
 
 
@@ -58,10 +62,11 @@ export const routes = [
     { path: '/store-product', component: StoreProduct, name: 'StoreProduct' },
     { path: '/product', component: Product, name: 'Product' },
     { path: '/edit-product/:id', component: EditProduct, name: 'EditProduct' },
-    // Product Router
-    { path: '/store-expense', component: StoreExpense, name: 'StoreExpense' },
-    { path: '/expense', component: Expense, name: 'Expense' },
-    { path: '/edit-expense/:id', component: EditExpense, name: 'EditExpense' },
+    // Salary Router
+    { path: '/given-salary', component: Salary, name: 'Salary' },
+    { path: '/pay-salary/:id', component: PaySalary, name: 'PaySalary' },
+    
+
     
   ]
 

@@ -129,6 +129,22 @@
                         </div>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#salary"
+                            aria-expanded="true" aria-controls="salary">
+                            <i class="far fa-fw fa-window-maximize"></i>
+                            <span>Salary</span>
+                        </a>
+                        <div id="salary" class="collapse" aria-labelledby="headingBootstrap"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Salary</h6>
+                                <router-link :to="{ name: 'StoreSalary' }" class="collapse-item">Add New</router-link>
+                                <router-link :to="{ name: 'Salary' }" class="collapse-item">List</router-link>
+                            </div>
+                        </div>
+                    </li>
+
 
                     <hr class="sidebar-divider">
 
