@@ -17,7 +17,7 @@
                                             Pay Salary
                                         </h1>
                                     </div>
-                                    <form @submit.prevent="employeeUpdate" class="edit-employee">
+                                    <form @submit.prevent="salarayPaid" class="edit-employee">
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -112,26 +112,22 @@ export default {
             form: {
                 name: '',
                 email: '',
-                address: '',
+                salary_month: '',
                 salary: '',
-                joining_date: '',
-                nid: '',
-                phone: '',
-                photo: 'default.jpg',
-                newPhoto: '',
+
             },
             errors: {},
             
         };
     },
-    mounted(){
-        $('#simple-date1 .input-group.date').datepicker({
-            format: 'dd/mm/yyyy',
-            todayBtn: 'linked',
-            todayHighlight: true,
-            autoclose: true,        
-        });
-    },
+    // mounted(){
+    //     $('#simple-date1 .input-group.date').datepicker({
+    //         format: 'dd/mm/yyyy',
+    //         todayBtn: 'linked',
+    //         todayHighlight: true,
+    //         autoclose: true,        
+    //     });
+    // },
 	created() {
         // Check Logged in?
         if (!User.loggedIn()) {
@@ -142,41 +138,35 @@ export default {
         axios.get('/api/employee/' + id)
             .then(res => {
                 this.form = res.data;
+                // console.log(this.form);
             })
             .catch(error => {
                 console.log(error);
-            })
-            
-            
+            })            
 
 	},
     methods: {
-        onFileSelected(event){
-            let file = event.target.files[0];
-            if(file.size > 1048576){
-                Notification.image_validation();
-            }
-            else{
-                let reader = new FileReader();
-                reader.onload = event => {
-                    this.form.photo = event.target.result;
-                    this.form.newPhoto = event.target.result;
-                }
-                reader.readAsDataURL(file);
-                
-            }
-            // console.log(event.target.result);
-
-        },
-        employeeUpdate(){
+        salarayPaid(){
             let id = this.$route.params.id;
-            axios.patch('/api/employee/'+id, this.form)
+            axios.post('/api/salary/paid/'+id, this.form)
                 .then(res => {
-                    this.$router.push({ name: 'Employee' });
-                    Notification.success(); 
+                    if( ! res.data.errors){
+                        this.$router.push({ name: 'GivenSalary' });
+                        Notification.success();
+                        
+                    }
+                    else if(res.data.errors == 'Salary already Paid.')
+                    {
+                        Notification.warning_text('Salary already Paid.');
+                    }
+                    else
+                    {
+                        this.errors = res.data.errors;   
+                    }                   
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
+                    console.log(this.errors);
                 })
         },
         getUrlPhoto(){

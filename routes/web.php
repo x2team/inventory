@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/test', 'HomeController@test');
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/{vue_capture?}', function() {
     return view('welcome');

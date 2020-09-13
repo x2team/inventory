@@ -139,8 +139,8 @@
                             data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Salary</h6>
-                                <router-link :to="{ name: 'StoreSalary' }" class="collapse-item">Add New</router-link>
-                                <router-link :to="{ name: 'Salary' }" class="collapse-item">List</router-link>
+                                <router-link :to="{ name: 'StoreSalary' }" class="collapse-item">Add Salary</router-link>
+                                <router-link :to="{ name: 'AllSalary' }" class="collapse-item">All Salary</router-link>
                             </div>
                         </div>
                     </li>

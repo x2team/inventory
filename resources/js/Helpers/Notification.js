@@ -45,6 +45,15 @@ class Notification
             
         }).show();
     }
+    warning_text(text){
+        new Noty({
+            type: 'warning',
+            text: text,
+            layout: 'topRight',
+            timeout: 1000,
+            
+        }).show();
+    }
 }
 
 export default Notification = new Notification();

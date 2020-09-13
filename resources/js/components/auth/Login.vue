@@ -102,8 +102,8 @@ export default {
     data() {
         return {
             form: {
-                email: null,
-                password: null
+                email: 'admin@gmail.com',
+                password: 'password'
             },
             errors: {},
             isEmail: false,
@@ -144,12 +144,12 @@ export default {
 
                     console.log(error.response.data);
                 })
-                .catch(
-                    Toast.fire({
-                        icon: "warning",
-                        title: "Invalid Email or Password,."
-                    })
-                );
+                // .catch(
+                //     Toast.fire({
+                //         icon: "warning",
+                //         title: "Invalid Email or Password,."
+                //     })
+                // );
         }
     },
     created() {

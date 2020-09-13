@@ -1,12 +1,13 @@
 <template>
     <div>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <router-link :to="{ name: 'StoreExpense' }" class="btn btn-primary"
-                >Add New Expense</router-link
+            <!-- <h1 class="h3 mb-0 text-gray-800">Simple Tables</h1> -->
+            <router-link :to="{ name: 'GivenSalary' }" class="btn btn-primary"
+                >Pay Salary</router-link
             >
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="./">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li class="breadcrumb-item">Tables</li>
                 <li class="breadcrumb-item active" aria-current="page">
@@ -33,41 +34,34 @@
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
                     >
                         <h6 class="m-0 font-weight-bold text-primary">
-                            Expense List
+                            All Salary Details
                         </h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Detail</th>
-                                    <th>Amount</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Month Name</th>
+                                    <th>Details</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="expense in filterSearch"
-                                    :key="expense.id"
+                                    v-for="salary in filterSearch"
+                                    :key="salary.id"
                                 >
-                                    <td>{{ expense.detail }}</td>
-                                    <td>{{ expense.amount }}</td>
-                                    <td>{{ expense.expense_date }}</td>
+                                    <td>{{ salary.salary_month }}</td>
                                     
                                     <td>
                                         <router-link
-                                            :to="{ name: 'EditExpense', params: {id:expense.id}}"
+                                            :to="{ name: 'ViewSalary', params: {id:salary.salary_month}}"
                                             class="btn btn-sm btn-primary"
                                         >
-                                            Edit
+                                            View Salary
                                         </router-link>
-                                        <button
-                                            @click="deleteExpense(expense.id)"
-                                            class="btn btn-sm btn-danger"
-                                        >
-                                            Delete
-                                        </button>
+                                        
+                                        
                                     </td>
                                 </tr>
                             </tbody>
@@ -84,7 +78,7 @@
 export default {
     data() {
         return {
-            expenses: [],
+            salaries: [],
             searchTerm: ""
         };
     },
@@ -94,58 +88,27 @@ export default {
             this.$router.push({ name: "/" });
         }
 
-        this.allExpense();
+        this.allSalary();
     },
     methods: {
-        allExpense() {
+        allSalary() {
             axios
-                .get("api/expense/")
+                .get("api/salary/")
                 .then(res => {
-                    this.expenses = res.data;
+
+                    this.salaries = res.data;
+                    console.log(this.salaries);
                 })
                 .catch(error => {});
         },
-        deleteExpense(id) {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then(result => {
-                if (result.value) {
-
-                    /**
-                     * Delete from Front End
-                     */
-                    axios.delete('api/expense/'+id)
-                    .then(res => {
-                        this.expenses = this.expenses.filter(expense => {
-                            return expense.id !== id;
-                        })
-                    })
-                    .catch(error => {
-                        this.$router.push({ name: 'Expense' })
-                    })
-
-
-                    Swal.fire(
-                        "Deleted!",
-                        "Your file has been deleted.",
-                        "success"
-                    );
-                }
-            });
-        },
-       
+        
+      
     },
     computed: {
         filterSearch() {
-            return this.expenses.filter(expense => {
+            return this.salaries.filter(salary => {
                 return (
-                    expense.detail.match(this.searchTerm)
+                    salary.salary_month.match(this.searchTerm)
                 );
             });
         }
