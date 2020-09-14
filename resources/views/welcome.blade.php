@@ -149,6 +149,14 @@
                     <hr class="sidebar-divider">
 
                     <li class="nav-item">
+                        <router-link :to="{ name: 'Stock' }" class="nav-link" href="ui-colors.html">
+                            <i class="fas fa-fw fa-palette"></i>
+                            <span>Stock</span>
+                        </router-link>
+                    </li>
+
+
+                    <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
                             aria-expanded="true" aria-controls="collapseForm">
                             <i class="fab fa-fw fa-wpforms"></i>
@@ -163,6 +171,7 @@
                             </div>
                         </div>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
                             aria-expanded="true" aria-controls="collapseTable">

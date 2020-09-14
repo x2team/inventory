@@ -2,7 +2,7 @@
     <div>
 
         <div class="row">
-            <router-link :to="{ name: 'Employee' }" class="btn btn-primary" >All Employee</router-link>
+            <router-link :to="{ name: 'AllSalary' }" class="btn btn-primary" >Go Back</router-link>
         </div>
 
         <div class="row justify-content-center">
@@ -14,10 +14,10 @@
                                 <div class="login-form">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">
-                                            Pay Salary
+                                            Update Salary
                                         </h1>
                                     </div>
-                                    <form @submit.prevent="salarayPaid" class="edit-employee">
+                                    <form @submit.prevent="salaryUpdate" class="edit-employee">
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -67,17 +67,20 @@
                                                 </select>
                                                 <small class="text-danger" v-if="errors.salary_month">{{ errors.salary_month[0] }}</small>
                                             </div>
+
+                                            <input type="hidden" v-model="form.employee_id">
+
                                             <div class="col-md-6">
-                                                <label for="salary"><b> Salary</b></label>
+                                                <label for="amount"><b> Amount</b></label>
                                                 <input
-                                                    name="salary"
+                                                    name="amount"
                                                     type="text"
                                                     class="form-control"
-                                                    id="salary"
-                                                    placeholder="Enter Your Salary"
-                                                    v-model="form.salary"
+                                                    id="amount"
+                                                    placeholder="Enter Your Amount"
+                                                    v-model="form.amount"
                                                 />
-                                                <small class="text-danger" v-if="errors.salary">{{ errors.salary[0] }}</small>
+                                                <small class="text-danger" v-if="errors.amount">{{ errors.amount[0] }}</small>
                                             </div>
                                         </div>
 
@@ -88,7 +91,7 @@
                                                 type="submit"
                                                 class="btn btn-primary btn-block"
                                             >
-                                                PayNow
+                                                Update
                                             </button>
                                         </div>
                                         <hr />
@@ -113,7 +116,8 @@ export default {
                 name: '',
                 email: '',
                 salary_month: '',
-                salary: '',
+                amount: '',
+                employee_id: '',
 
             },
             errors: {},
@@ -135,10 +139,10 @@ export default {
         }
 
         let id = this.$route.params.id;
-        axios.get('/api/employee/' + id)
+        axios.get('/api/edit/salary/' + id)
             .then(res => {
                 this.form = res.data;
-                // console.log(this.form);
+                console.log(this.form);
             })
             .catch(error => {
                 console.log(error);
@@ -146,19 +150,16 @@ export default {
 
 	},
     methods: {
-        salarayPaid(){
+        salaryUpdate(){
             let id = this.$route.params.id;
-            axios.post('/api/salary/paid/'+id, this.form)
+            axios.post('/api/salary/update/'+id, this.form)
                 .then(res => {
                     if( ! res.data.errors){
-                        this.$router.push({ name: 'GivenSalary' });
+                        this.$router.push({ name: 'AllSalary' });
                         Notification.success();
                         
                     }
-                    else if(res.data.errors == 'Salary already Paid.')
-                    {
-                        Notification.warning_text('Salary already Paid.');
-                    }
+                   
                     else
                     {
                         this.errors = res.data.errors;   

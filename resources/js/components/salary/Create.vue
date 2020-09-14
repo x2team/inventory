@@ -17,7 +17,7 @@
                                             Pay Salary
                                         </h1>
                                     </div>
-                                    <form @submit.prevent="salarayPaid" class="edit-employee">
+                                    <form @submit.prevent="salaryPaid" class="edit-employee">
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -146,7 +146,7 @@ export default {
 
 	},
     methods: {
-        salarayPaid(){
+        salaryPaid(){
             let id = this.$route.params.id;
             axios.post('/api/salary/paid/'+id, this.form)
                 .then(res => {

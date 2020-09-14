@@ -67,6 +67,37 @@ class SalaryController extends Controller
 
         return response()->json($view);
     }
+    public function editSalary($id)
+    {
+        $view = DB::table('salaries')
+                ->join('employees', 'salaries.employee_id', 'employees.id')
+                ->select('employees.name', 'employees.email', 'salaries.*')
+                ->where('salaries.id', $id)
+                ->first();
+        return response()->json($view);
+    }
+    public function salaryUpdate(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'employee_id' => 'required',
+            'amount' => 'required',
+            'salary_month' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()]);
+        }
+        else{
+            $data = $validator->validated();
+            
+            
+            $salary = Salary::findOrFail($id);
+            
+            $salary->update($data);
+            
+        }
+   
+    }
 
 
 }
