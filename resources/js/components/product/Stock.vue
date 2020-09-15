@@ -73,7 +73,7 @@
                                     <td>{{ product.product_quantity }}</td>
                                     <td>
                                         <router-link
-                                            :to="{ name: 'EditProduct', params: {id:product.id}}"
+                                            :to="{ name: 'EditStock', params: {id:product.id}}"
                                             class="btn btn-sm btn-primary"
                                         >
                                             Edit

@@ -58,11 +58,11 @@ class SalaryController extends Controller
 
     public function viewSalary($id)
     {
-        // dd($id);
+        $month = $id;
         $view = DB::table('salaries')
             ->join('employees', 'salaries.employee_id', 'employees.id')
             ->select('employees.name', 'salaries.*')
-            ->where('salaries.salary_month', $id)
+            ->where('salaries.salary_month', $month)
             ->get();
 
         return response()->json($view);
@@ -87,7 +87,8 @@ class SalaryController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
         }
-        else{
+        else
+        {
             $data = $validator->validated();
             
             

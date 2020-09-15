@@ -39,6 +39,7 @@ let EditSalary = require('./components/salary/Edit.vue').default;
 
 // Stock Component
 let Stock = require('./components/product/Stock.vue').default;
+let EditStock = require('./components/product/EditStock.vue').default;
 
 
 
@@ -82,6 +83,7 @@ export const routes = [
 
     // Stock Router
     { path: '/stock', component: Stock, name: 'Stock' },
+    { path: '/edit-stock/:id', component: EditStock, name: 'EditStock' },
     
     
 

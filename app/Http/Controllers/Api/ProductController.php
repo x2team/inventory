@@ -226,4 +226,23 @@ class ProductController extends Controller
             if( file_exists($imageFilePath)) unlink($imageFilePath);
         }
     }
+
+    public function stockUpdate(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_quantity'     => 'required',
+ 
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()]);
+        }
+        else
+        {
+            $data = $validator->validated();
+
+            $stock = Product::findOrFail($id)->update($data);
+        }
+
+    }
 }
