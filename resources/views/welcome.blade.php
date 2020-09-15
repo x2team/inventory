@@ -39,10 +39,17 @@
                         <div class="sidebar-brand-text mx-3">RuangAdmin</div>
                     </a>
                     <hr class="sidebar-divider my-0">
+                    
                     <li class="nav-item active">
                         <router-link :to="{ name: 'Home'}" class="nav-link">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span></router-link>
+                    </li>
+
+                    <li class="nav-item bg-info">
+                        <router-link :to="{ name: 'Home'}" class="nav-link">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>POS</span></router-link>
                     </li>
 
                     <hr class="sidebar-divider">
@@ -130,6 +137,22 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customer"
+                            aria-expanded="true" aria-controls="customer">
+                            <i class="far fa-fw fa-window-maximize"></i>
+                            <span>Customers</span>
+                        </a>
+                        <div id="customer" class="collapse" aria-labelledby="headingBootstrap"
+                            data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Customers</h6>
+                                <router-link :to="{ name: 'StoreCustomer' }" class="collapse-item">Add New</router-link>
+                                <router-link :to="{ name: 'Customer' }" class="collapse-item">List</router-link>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#salary"
                             aria-expanded="true" aria-controls="salary">
                             <i class="far fa-fw fa-window-maximize"></i>
@@ -157,20 +180,25 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
-                            aria-expanded="true" aria-controls="collapseForm">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#report"
+                            aria-expanded="true" aria-controls="report">
                             <i class="fab fa-fw fa-wpforms"></i>
-                            <span>Forms</span>
+                            <span>Reports</span>
                         </a>
-                        <div id="collapseForm" class="collapse" aria-labelledby="headingForm"
+                        <div id="report" class="collapse" aria-labelledby="headingForm"
                             data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Forms</h6>
-                                <a class="collapse-item" href="form_basics.html">Form Basics</a>
-                                <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
+                                <h6 class="collapse-header">Reports</h6>
+                                <a class="collapse-item" href="form_basics.html">Report One</a>
+                                <a class="collapse-item" href="form_advanceds.html">Report Two</a>
                             </div>
                         </div>
                     </li>
+
+                    <hr class="sidebar-divider">
+
+
+
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"

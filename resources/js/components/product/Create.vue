@@ -217,7 +217,7 @@ export default {
     methods: {
         productInsert(){
 
-            var formData = new FormData(document.getElementById('product-form'));
+            let formData = new FormData(document.getElementById('product-form'));
 
             axios.post('/api/product', formData)
                 .then(res => {
