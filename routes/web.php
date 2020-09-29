@@ -22,7 +22,7 @@ Route::get('/test', 'HomeController@test');
 // });
 
 Route::get('/{vue_capture?}', function() {
-    return view('welcome');
+    return view('dashboard');
 })->where('vue_capture', '[\/\w\.-]*');
 
 // Auth::routes();

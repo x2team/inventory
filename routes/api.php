@@ -26,25 +26,25 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
-    Route::post('signup', 'AuthController@signup');
+    Route::post('login', 'App\Http\Controllers\AuthController@login');
+    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+    Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
+    Route::post('me', 'App\Http\Controllers\AuthController@me');
+    Route::post('signup', 'App\Http\Controllers\AuthController@signup');
 
 });
 
-Route::apiResource('/employee', 'Api\EmployeeController');
-Route::apiResource('/supplier', 'Api\SupplierController');
-Route::apiResource('/category', 'Api\CategoryController');
-Route::apiResource('/product', 'Api\ProductController');
-Route::apiResource('/expense', 'Api\ExpenseController');
-Route::apiResource('/customer', 'Api\CustomerController');
+Route::apiResource('/employee', 'App\Http\Controllers\Api\EmployeeController');
+Route::apiResource('/supplier', 'App\Http\Controllers\Api\SupplierController');
+Route::apiResource('/category', 'App\Http\Controllers\Api\CategoryController');
+Route::apiResource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::apiResource('/expense', 'App\Http\Controllers\Api\ExpenseController');
+Route::apiResource('/customer', 'App\Http\Controllers\Api\CustomerController');
 
-Route::post('/salary/paid/{id}', 'Api\SalaryController@paid');
-Route::get('/salary', 'Api\SalaryController@allSalary');
-Route::get('/salary/view/{id}', 'Api\SalaryController@viewSalary');
-Route::get('/edit/salary/{id}', 'Api\SalaryController@editSalary');
-Route::post('/salary/update/{id}', 'Api\SalaryController@salaryUpdate');
+Route::post('/salary/paid/{id}', 'App\Http\Controllers\Api\SalaryController@paid');
+Route::get('/salary', 'App\Http\Controllers\Api\SalaryController@allSalary');
+Route::get('/salary/view/{id}', 'App\Http\Controllers\Api\SalaryController@viewSalary');
+Route::get('/edit/salary/{id}', 'App\Http\Controllers\Api\SalaryController@editSalary');
+Route::post('/salary/update/{id}', 'App\Http\Controllers\Api\SalaryController@salaryUpdate');
 
-Route::put('/stock/update/{id}', 'Api\ProductController@stockUpdate');
+Route::put('/stock/update/{id}', 'App\Http\Controllers\Api\ProductController@stockUpdate');
