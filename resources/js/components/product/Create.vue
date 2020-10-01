@@ -220,6 +220,8 @@ export default {
             let formData = new FormData(document.getElementById('product-form'));
 
             axios.post('/api/product', formData)
+                // console.log(formData)
+
                 .then(res => {
                     if( ! res.data.errors){
                         this.$router.push({ name: 'Product' });
@@ -235,14 +237,14 @@ export default {
 
 
 
-            // axios.post('/api/employee', this.form)
-            //     .then(res => {
-            //         this.$router.push({ name: 'Employee' });
-            //         Notification.success(); 
-            //     })
-            //     .catch(error => {
-            //         this.errors = error.response.data.errors;
-            //     })
+            axios.post('/api/employee', this.form)
+                .then(res => {
+                    this.$router.push({ name: 'Employee' });
+                    Notification.success(); 
+                })
+                .catch(error => {
+                    this.errors = error.response.data.errors;
+                })
         }
     },
 	computed: {
@@ -250,5 +252,3 @@ export default {
     }
 };
 </script>
-
-<style lang=""></style>

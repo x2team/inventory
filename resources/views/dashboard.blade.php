@@ -11,6 +11,7 @@
     <title>RuangAdmin - Dashboard</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -20,6 +21,8 @@
 
 
     <link href="{{ asset('backend/css/ruang-admin.min.css') }}" rel="stylesheet">
+
+    
 
 </head>
 
@@ -47,7 +50,7 @@
                     </li>
 
                     <li class="nav-item bg-info">
-                        <router-link :to="{ name: 'Home'}" class="nav-link">
+                        <router-link :to="{ name: 'Pos'}" class="nav-link">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>POS</span></router-link>
                     </li>

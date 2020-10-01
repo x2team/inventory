@@ -181,11 +181,4 @@ export default {
 };
 </script>
 
-<style>
-#photo {
-    height: 40px;
-    width: 40px;
-}
 
-
-</style>

@@ -121,5 +121,3 @@ export default {
     computed: {}
 };
 </script>
-
-<style lang=""></style>

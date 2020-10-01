@@ -26,6 +26,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="name"
+                                                    name="name"
                                                     placeholder="Enter Your Full Name"
                                                     v-model="form.name"
                                                 />
@@ -37,6 +38,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="email"
+                                                    name="email"
                                                     placeholder="Enter Your Email"
                                                     v-model="form.email"
                                                 />
@@ -51,6 +53,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="address"
+                                                    name="address"
                                                     placeholder="Enter Your Address"
                                                     v-model="form.address"
                                                 />
@@ -62,6 +65,7 @@
                                                     type="text"
                                                     class="form-control"
                                                     id="phone"
+                                                    name="phone"
                                                     placeholder="Enter Your phone"
                                                     v-model="form.phone"
                                                 />
@@ -158,5 +162,3 @@ export default {
     }
 };
 </script>
-
-<style lang=""></style>
