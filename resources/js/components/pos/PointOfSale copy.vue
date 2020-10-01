@@ -110,8 +110,10 @@
                                         <label>Customer Name</label>
                                         <select
                                             class="form-control"
+                                            v-model="customer_id"
                                         >
-                                            <option v-for="customer in customers" :key="customer.id">{{ customer.name }}</option>
+                                            <option>abc</option>
+                                            <option>abc</option>
                                         </select>
 
                                         <label>Pay</label>
@@ -225,9 +227,6 @@
                                             v-for="product in filterSearch"
                                             :key="product.id"
                                         >
-
-                                            <button class="btn btn-sm" @click.prevent="AddToCart(product.id)">
-
                                             <div
                                                 class="card"
                                                 style="width: 8.5rem; margin-bottom: 5px"
@@ -265,7 +264,6 @@
                                                     >
                                                 </div>
                                             </div>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -393,13 +391,7 @@ export default {
             categories: "", // [] van chay
             getProducts: [],
             searchTerm: "",
-            getSearchTerm: "",
-            customers: "",
-            errors: "",
-
-            pay: "",
-            due: "",
-            payby: "",
+            getSearchTerm: ""
         };
     },
     created() {
@@ -410,20 +402,8 @@ export default {
 
         this.allProduct();
         this.allCategory();
-        this.allCustomer();
     },
     methods: {
-
-        // Cart methods:
-        AddToCart(id){
-            axios
-                .get("api/AddToCart/" + id)
-                .then(res => {
-                    Notification.cart_success();
-                })
-                .catch(error => {});
-        },
-
         allProduct() {
             axios
                 .get("api/product/")
@@ -437,14 +417,6 @@ export default {
                 .get("api/category/")
                 .then(res => {
                     this.categories = res.data;
-                })
-                .catch(error => {});
-        },
-        allCustomer() {
-            axios
-                .get("api/customer/")
-                .then(res => {
-                    this.customers = res.data;
                 })
                 .catch(error => {});
         },

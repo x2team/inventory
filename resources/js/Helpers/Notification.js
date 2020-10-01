@@ -54,6 +54,15 @@ class Notification
             
         }).show();
     }
+    cart_success(){
+        new Noty({
+            type: 'success',
+            text: 'Successfully Add To Cart!',
+            layout: 'topRight',
+            timeout: 1000,
+            
+        }).show();
+    }
 }
 
 export default Notification = new Notification();
