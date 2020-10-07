@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/test', 'App\Http\Controllers\HomeController@test');
+//Route::get('/test', 'App\Http\Controllers\HomeController@test');
+Route::get('pay', 'App\Http\Controllers\PayOrderController@store');
+
 
 
 // Route::get('/', function () {
