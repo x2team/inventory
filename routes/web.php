@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\PostcardSendingService;
 use App\Postcard;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,11 @@ use App\Postcard;
 
 
 //Route::get('/test', 'App\Http\Controllers\HomeController@test');
+Route::get('/', function (){
+    dd(Str::partNumber('123456789'));
+    dd(Str::prefix('123456789', 'ADD-'));
+    return (Response::errorJson());
+});
 
 // Route for Service Container
 Route::get('pay', 'App\Http\Controllers\PayOrderController@store');
